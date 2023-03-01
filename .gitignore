@@ -1,0 +1,3 @@
+# ignore os arquivos no checkpoint
+.ipynb_checkpoints
+ratings.csv
