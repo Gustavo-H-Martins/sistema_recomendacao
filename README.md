@@ -1,4 +1,6 @@
 [![Gustavo-H-Martins](https://github-readme-stats.vercel.app/api?username=Gustavo-H-Martins&show_icons=true&theme=radical)](https://github.com/Gustavo-H-Martins)
+
+
 [Página online do modelo em operação](https://sistemaderecomendacao.gustavo-h-marti.repl.co/)
 # CRIANDO UM SISTEMA DE RECOMENDAÇÃO DE FILMES
 Este notebook apresenta um passo a passo para criar um sistema de recomendação de filmes. A fonte de dados utilizada está disponível no [Kaggle](https://www.kaggle.com/code/alyssonbispopereira/recomenda-o-de-filmes-ptbr/data).
