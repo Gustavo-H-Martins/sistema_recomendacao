@@ -3,10 +3,18 @@ import pandas as pd
 import numpy as np
 
 # Importar o arquivo com os filmes e visualizar as primeiras linhas
-filmes = pd.read_csv('movies_metadata.csv', usecols=['id','original_title','original_language','vote_count'], low_memory = False)
+filmes = pd.read_csv('movies_metadata.csv', 
+                     usecols=['id','original_title','original_language','vote_count'], 
+                     low_memory=False, 
+                     dtype={'id': int, 'vote_count': int},
+                     error_bad_lines=False)
 
 # Importando o arquivo de avaliações e avaliando as primeiras linhas
-avaliacoes = pd.read_csv('ratings.csv', usecols=['userId','movieId','rating'])
+avaliacoes = pd.read_csv('ratings.csv', 
+                         usecols=['userId','movieId','rating'], 
+                         dtype={'userId':int,'movieId':int,'rating':float}, 
+                         nrows=1000000,
+                         error_bad_lines=False)
 
 # Renomeia as variaveis
 filmes.rename(columns = {'id':'ID_FILME','original_title':'TITULO','original_language':'LINGUAGEM','vote_count':'QT_AVALIACOES'}, inplace = True)
@@ -27,7 +35,7 @@ y = qt_avaliacoes[qt_avaliacoes].index
 avaliacoes = avaliacoes[avaliacoes['ID_USUARIO'].isin(y)]
 
 # Vamos usar os filmes que possuem somente uma quantidade de avaliações superior a 999 avaliações
-filmes = filmes[filmes['QT_AVALIACOES'] > 999]
+filmes = filmes.query('QT_AVALIACOES > 999')
 
 # Vamos agrupar e visualizar a quantidade de filmes pela linguagem
 filmes_linguagem = filmes['LINGUAGEM'].value_counts()
@@ -61,7 +69,7 @@ from scipy.sparse import csr_matrix
 
 
 # Vamos transformar o nosso dataset em uma matriz sparsa
-filmes_sparse = csr_matrix(filmes_pivot)
+filmes_sparse = filmes_pivot.to_sparse()
 
 # Vamos importar o algoritmo KNN do SciKit Learn
 from sklearn.neighbors import NearestNeighbors 
