@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for
 from sistemaRecomendacao import movie_recomendation
 import pandas as pd
 app = Flask(__name__)
@@ -23,6 +23,7 @@ def index_post():
     title = request.form['title']
     results = movie_recomendation([title])
     return render_template('index.html', results=results)
+
 
 if __name__ == '__main__':
     app.run()
