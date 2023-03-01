@@ -3,23 +3,15 @@ import pandas as pd
 import numpy as np
 
 # Importar o arquivo com os filmes e visualizar as primeiras linhas
-filmes = pd.read_csv('movies_metadata.csv', low_memory = False)
+filmes = pd.read_csv('movies_metadata.csv', usecols=['id','original_title','original_language','vote_count'], low_memory = False)
 
 # Importando o arquivo de avaliações e avaliando as primeiras linhas
-avaliacoes = pd.read_csv('ratings.csv')
-
-# Filtrando somente as colunas necessários e renomeando nome das variaveis
-
-# Seleciona somente as variaveis que iremos utilizar
-filmes = filmes [['id','original_title','original_language','vote_count']]
+avaliacoes = pd.read_csv('ratings.csv', usecols=['userId','movieId','rating'])
 
 # Renomeia as variaveis
 filmes.rename(columns = {'id':'ID_FILME','original_title':'TITULO','original_language':'LINGUAGEM','vote_count':'QT_AVALIACOES'}, inplace = True)
 
 # Filtrando somente as colunas necessários e renomeando nome das variaveis
-
-# Seleciona somente as variaveis que iremos utilizar
-avaliacoes = avaliacoes [['userId','movieId','rating']]
 
 # Renomeia as variaveis
 avaliacoes.rename(columns = {'userId':'ID_USUARIO','movieId':'ID_FILME','rating':'AVALIACAO'}, inplace = True)
